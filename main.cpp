@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-using namsepace std;
+using namespace std;
 
 int main() {
     cout << "hello world";
