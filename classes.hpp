@@ -8,6 +8,8 @@ struct TVShow{
     string genre = "";
     float rating = 0.0;
     int year = 2000;
+    int seasons = 1;
+    int episodes = 1;
     //add more later
 };
 

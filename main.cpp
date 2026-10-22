@@ -7,4 +7,6 @@ using namespace std;
 
 int main() {
     cout << "hello world";
+    //can someone make a cmake file i cant even run the code this is awful
+
 }
