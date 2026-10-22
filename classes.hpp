@@ -3,6 +3,7 @@
 
 #pragma once
 using namespace std;
+
 struct TVShow{
     string title = "";
     string genre = "";
@@ -56,4 +57,5 @@ class Database{
             }
             return true;
         }
+        bool (*compareTitle)(TVShow*, TVShow*) = [](TVShow* a, TVShow* b){return a->title < b->title;};
 };
