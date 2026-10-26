@@ -1,7 +1,9 @@
+#pragma once
 #include <string>
 #include <vector>
+#include "string_stuff.h"
+#include <cctype> //used for the strings
 
-#pragma once
 using namespace std;
 struct TVShow{
     string title = "";
@@ -56,4 +58,16 @@ class Database{
             }
             return true;
         }
+
+		bool hasGenre(){
+ 			return true;}  //in p-p-progress
+		string toLower(string s){
+			for(int i =0; i <s.size(); i++){
+				s[i] = tolower(s[i]);
+			}
+			return s;
+         }
+		//quick sort
+		//heap sort
+		//merge sort
 };
