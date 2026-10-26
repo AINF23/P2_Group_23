@@ -69,5 +69,5 @@ class Database{
          }
 		//quick sort
 		//heap sort
-		//merge sort
+		//merge sor
 };

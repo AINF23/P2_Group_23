@@ -8,6 +8,6 @@
 
 // bool startsWith(const std::string & text, const std::string& prefix);
 std::string toLower(std::string s);
-
+//
 
 #endif //P2_GROUP_23_STRING_STUFF_H
