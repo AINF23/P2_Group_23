@@ -39,7 +39,7 @@ int main(){
 
     vector<int> unsorted = {7, 4, 3, 9, 16, 32, 2};
     bool (*compare)(const int&, const int&) = [](const int &a, const int& b){return a < b;};
-    vector<int> sorted = mergeSort(unsorted, compare);
+    vector<int> sorted = heapSort(unsorted, compare);
 
     for (int i = 0; i < sorted.size(); i++){
         if (i != sorted.size() - 1){

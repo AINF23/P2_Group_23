@@ -12,16 +12,20 @@ struct TVShow{
     int year = 2000;
     int seasons = 1;
     int episodes = 1;
-    //add more later
 };
 
 struct Query{
     float ratingMin = 1.0;
     float ratingMax = 10.0;
+    int yearMin = 0;
+    int yearMax = 3000;
+    int seasonMin = 0;
+    int seasonMax = 10000;
+    int episodeMin = 0;
+    int episodeMax = 10000;
     string titlePrefix = "";
     string genrePrefix = "";
-    //might need more data later
-    string sortAlgo = "quick";
+    string sortAlgo = "merge";
     string sortBy = "rating";
     bool descending = false;
 };
