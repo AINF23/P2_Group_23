@@ -108,3 +108,46 @@ function showResults(data, q){
         " sorted in " + data.sortMs.toFixed(2) + " ms." +source;
 
 }
+
+function showPick(){
+    if(currentShows.length === 0){
+        document.getElementById("status").textContent = "No shows."
+        return;
+    }
+    const show = currentShows[Math.floor(Math.random() * currentShows.length)];
+    const box = document.getElementById("pick");
+    box.replaceChildren();
+    const label = document.createElement("p");
+    label.className = "label";
+    label.textContent = "Watch this :)";
+    const title = document.createElement("h2");
+    title.textContent = show.title;
+    const meta = document.createElement("p");
+    meta.textContent = show.year + ", rated " + Number(show.rating).toFixed(1); + ", " +
+        show.seasons + (show.seasons === 1 ? " season" : "seasons");
+    box.append(label, title, meta);
+    box.hidden = false;
+}
+
+async function runSearch(){
+      const q = readQuery();
+      try{
+          const data = use_sample ? searchSample(q) : await searchSever(q);
+          showResults(data, q);
+      }
+      catch(error){
+          document.getElementById("status").textContent = "Cant reach the sever";
+      }
+}
+
+      document.getElementById("filters").addEventById("filters").addEventListener("sumbit",
+          function(event) {
+          event.preventDefault();
+          runSearch();
+          });
+      document.getElementById("suprise").addEventListener("click", showPick);
+      document.getElementById("ratingMin").addEventListener("input", function(event) {
+          document.getElementById("ratingOut").textContent = Number(event.target.value).toFixed(1);
+      });
+
+      runSearch();
