@@ -3,8 +3,8 @@ const Max_Results = 25;
 let currentShows = [];
 
 const sample_show = [
-    {title: "Breaking Bad", year: 2000, rating: 9.5, seasons: 5, episodes: 62, genre: "Crime, Drama"},
-    {title: "Loki", year: 2022, rating: 8.2, seasons: 2, episodes: 12, genre: "Action, Adventure"}
+    {title: "Breaking Bad", year: 2000, rating: 9.5, seasons: 5, episodes: 62, genre: "Crime,Drama"},
+    {title: "Loki", year: 2022, rating: 8.2, seasons: 2, episodes: 12, genre: "Action,Adventure"}
 ];
 
 function readQuery(){
@@ -25,12 +25,12 @@ function readQuery(){
 function searchSample(q){
     const start = performance.now();
     let shows = sample_show.filter(function(s){
-        if(s.rating < Number(q.ratinMin)) return false;
+        if(s.rating < Number(q.ratingMin)) return false;
         if(q.yearMin !== "" && s.year < Number(q.yearMin)) return false;
         if(q.yearMax !== "" && s.year > Number(q.yearMax)) return false;
-        if(q.seasonsMin !== "" && s.seasons < Number(q.seasonsMax)) return false;
+       // if(q.seasonsMin !== "" && s.seasons < Number(q.seasonsMin)) return false;
         if(q.seasonsMax !== "" && s.seasons > Number(q.seasonsMax)) return false;
-        if(q.titlePrefix != "" && !s.title.toLowerCase().startsWith(q.titlePrefix.toLowerCase())) return false;
+        if(q.titlePrefix !== "" && !s.title.toLowerCase().startsWith(q.titlePrefix.toLowerCase())) return false;
         if(q.genre !== "" && !s.genre.split(",").includes(q.genre)) return false;
         return true;
 });
@@ -79,7 +79,7 @@ function makeRow(show){
 
     const size = document.createElement("div");
     size.className = "size";
-    size.textContent = show.seasons + (show.seasons === 1 ? " season, " : " seasons, ") + show.episodes + "episodes";
+    size.textContent = show.seasons + (show.seasons === 1 ? " season, " : " seasons, ") + show.episodes + " episodes";
 
     li.append(rating,info,size);
     return li;
@@ -104,7 +104,7 @@ function showResults(data, q){
 
     }
     const source = use_sample ? " (sample data)" : "";  //testing
-    status.textContent = data.total + "shows: " + shown + "sorted with: " + q.sortAlgo +
+    status.textContent = data.total + " shows: " + shown + " sorted with: " + q.sortAlgo +
         " sorted in " + data.sortMs.toFixed(2) + " ms." +source;
 
 }
@@ -123,8 +123,8 @@ function showPick(){
     const title = document.createElement("h2");
     title.textContent = show.title;
     const meta = document.createElement("p");
-    meta.textContent = show.year + ", rated " + Number(show.rating).toFixed(1); + ", " +
-        show.seasons + (show.seasons === 1 ? " season" : "seasons");
+    meta.textContent = show.year + ", rated " + Number(show.rating).toFixed(1) + ", " +
+        show.seasons + (show.seasons === 1 ? " season" : " seasons");
     box.append(label, title, meta);
     box.hidden = false;
 }
@@ -132,7 +132,7 @@ function showPick(){
 async function runSearch(){
       const q = readQuery();
       try{
-          const data = use_sample ? searchSample(q) : await searchSever(q);
+          const data = use_sample ? searchSample(q) : await searchServer(q);
           showResults(data, q);
       }
       catch(error){
@@ -140,14 +140,14 @@ async function runSearch(){
       }
 }
 
-      document.getElementById("filters").addEventById("filters").addEventListener("sumbit",
+      document.getElementById("filters").addEventListener("submit",
           function(event) {
           event.preventDefault();
           runSearch();
           });
       document.getElementById("suprise").addEventListener("click", showPick);
       document.getElementById("ratingMin").addEventListener("input", function(event) {
-          document.getElementById("ratingOut").textContent = Number(event.target.value).toFixed(1);
+    document.getElementById("ratingOut").textContent = Number(event.target.value).toFixed(1);
       });
 
       runSearch();
