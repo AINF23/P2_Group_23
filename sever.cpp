@@ -36,11 +36,12 @@ string getText(const httplib::Request &req, const string &name, const string &fa
 
 int main() {
     cout << "testing" <<endl;
-    vector<TVShow*> shows = loadShows("../data/title.basics.tsv","../data/title.ratings.tsv", "../data/title.episode.tsv", 2000,1000);
+    vector<TVShow*> shows = loadShows("../data/title.basics.tsv","../data/title.ratings.tsv", "../data/title.episode.tsv", 1950,100);
     cout << "Loaded " <<shows.size() << " shows" << endl;
 
     Database db;
     db.loadData(shows);
+    cout << db.data[3]->title << endl;
 
     httplib::Server server;
     server.set_mount_point("/", "../web");
@@ -54,8 +55,8 @@ int main() {
         q.sortBy = getText(req, "sortBy", "rating");
         q.sortAlgo = getText(req, "sortAlgo", "quick");
         q.descending = (getText(req, "descending", "false") == "true");
-        q.yearMin = getFloat(req, "ratingMin", 0);
-        q.yearMax = (int) getFloat(req, "yearMin", 0);
+        q.yearMin = getFloat(req, "yearMin", 0);
+        q.yearMax = (int) getFloat(req, "yearMax", 2050);
         q.seasonMax = (int) getFloat(req, "seasonsMax", 10000);
         q.episodeMin = (int) getFloat(req, "episodesMin", 1);
         q.episodeMax = (int) getFloat(req, "episodesMax", 10000);

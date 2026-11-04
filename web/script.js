@@ -1,4 +1,4 @@
-const use_sample = true;
+const use_sample = false;
 const Max_Results = 25;
 let currentShows = [];
 
