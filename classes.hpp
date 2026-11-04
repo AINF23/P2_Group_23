@@ -69,10 +69,10 @@ class Database{
             if (q.sortBy == "year"){
                 compareUsed = compareYear;
             }
-            if (q.sortBy == "episode"){
+            if (q.sortBy == "episode" || q.sortBy == "episodes"){
                 compareUsed = compareEpisode;
             }
-            if (q.sortBy == "season"){
+            if (q.sortBy == "season" || q.sortBy == "seasons"){
                 compareUsed = compareSeason;
             }
 
@@ -93,7 +93,7 @@ class Database{
                 return result;
             }
         }
-    private:
+    public:
         vector<TVShow*> data;
         bool checkPrefix(string prefix, string s){
             for (int i = 0; i < prefix.size(); i++){
