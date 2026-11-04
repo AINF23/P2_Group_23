@@ -3,9 +3,7 @@
     --panel: #FFFFFF;
     --text: #040d26;
     --line: #077a29;
-    --buttonBG: #ef9ad1;
-    --status: #d56913
-    --gold: #ffc107
+    --buttonBG: #bfadf1;
 }
 
 *{box-sizing: border-box;}
@@ -19,9 +17,8 @@ body{
 }
 
 .top{
+    margin: 0;
     padding: 15px 24px 6px;
-    margin: 0 auto;
-    max-width: 1200px;
 }
 
 .top h1{
@@ -34,7 +31,6 @@ body{
 
 .top p{
     margin: 0;
-    max-width: 52ch;
     color: var(--text);
 }
 
@@ -63,17 +59,24 @@ body{
     background-color: var(--panel);
     border: 1px solid var(--line);
     border-radius: 10px;
-    padding: 20px;
+    padding: 10px;
     display: grid;
     gap: 16px;
 }
 
-.panel label,
+.panel label{
+    display: grid;
+    gap: 6px;
+}
+.panel label.check{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 .panel legend{
     display: flex;
     align-items: center;
     gap: 8px;
-    font size: 12px;
 }
 .buttons {
     display: grid;
@@ -87,7 +90,7 @@ button{
     border-radius: 6px;
     border: 1px solid var(--line);
     background-color: var(--buttonBG);
-    color: #e12222;
+    color: #07173e;
     cursor: pointer;
 }
 .status{
