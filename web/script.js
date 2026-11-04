@@ -155,7 +155,7 @@ async function runSearch(){
     document.getElementById("ratingOut").textContent = Number(event.target.value).toFixed(1);
       });
 
-      runSearch();
+      //runSearch();
 
 //responsive slider
 function updateRatingSlider(){

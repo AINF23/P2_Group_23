@@ -18,11 +18,10 @@
 
 <main class = "main">
     <form id = "filters" class = "panel">
-        <label> Do you remember the title? If so enter here:
+        <label> <span> Do you remember the title?<br> If so enter here: </span>
             <input id="titlePrefix" type = "text" name = "titlePrefix" placeholder = "Enter a title">
         </label>
-        <br>
-        <label> Genre
+        <label> Genre:
             <select id = "genre" name = "genre">
                 <option value=""> Any genre </option>
                 <option> Action </option>
@@ -54,10 +53,9 @@
             <input id="yearMax" type="number" placeholder="2026" aria-label="To year">
         </fieldset>
 
-        <label> Max Seasons
+        <label> Max Seasons:
             <input id="seasonsMax" type="number" min="1" placeholder="Any">
         </label>
-        <br>
         <label> Sort By:
             <select id = "sortBy" name = "sortBy">
                 <option value="rating"> Rating </option>
