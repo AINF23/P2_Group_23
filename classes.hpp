@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <ctime>
 #include "sorting.hpp"
 
 using namespace std;
@@ -32,10 +33,12 @@ struct Query{
 
 class Database{
     public:
+        double duration = 0;
         void loadData(const vector<TVShow*>& dataToLoad){
             data = dataToLoad;
         }
         vector<TVShow*> applyQuery(const Query& q){
+            clock_t startTime = clock();
             vector<TVShow*> result;
             for (int i = 0; i < data.size(); i++){
                 if (data[i]->rating < q.ratingMin || data[i]->rating > q.ratingMax){
@@ -77,15 +80,16 @@ class Database{
             }
 
             if (q.sortAlgo == "merge"){
-                return mergeSort(result, compareUsed);
+                result = mergeSort(result, compareUsed);
             }
             if (q.sortAlgo == "heap"){
-                return heapSort(result, compareUsed);
+                result = heapSort(result, compareUsed);
             }
             if (q.sortAlgo == "quick"){
-                return quickSort(result, compareUsed);
+                result = quickSort(result, compareUsed);
             }
-
+            clock_t endTime = clock();
+            duration = double(endTime - startTime) / CLOCKS_PER_SEC;
             if (q.descending){
                 return vector<TVShow*>(result.rbegin(), result.rend());
             }
