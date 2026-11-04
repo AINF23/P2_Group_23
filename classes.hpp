@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
-//#include "sorting.hpp"
+#include "sorting.hpp"
 
 using namespace std;
 
@@ -47,10 +47,51 @@ class Database{
                 if (!checkPrefix(q.genrePrefix, data[i]->genre)){
                     continue;
                 }
-                //still more to code...
+                if (data[i]->year < q.yearMin || data[i]->year > q.yearMax){
+                    continue;
+                }
+                if (data[i]->seasons < q.seasonMin || data[i]->seasons > q.seasonMax){
+                    continue;
+                }
+                if (data[i]->episodes < q.episodeMin || data[i]->episodes > q.episodeMax){
+                    continue;
+                }
                 result.push_back(data[i]);
             }
-            return result;
+
+            bool (*compareUsed)(TVShow*&, TVShow*&);
+            if (q.sortBy == "rating"){
+                compareUsed = compareRating;
+            }
+            if (q.sortBy == "title"){
+                compareUsed = compareTitle;
+            }
+            if (q.sortBy == "year"){
+                compareUsed = compareYear;
+            }
+            if (q.sortBy == "episode"){
+                compareUsed = compareEpisode;
+            }
+            if (q.sortBy == "season"){
+                compareUsed = compareSeason;
+            }
+
+            if (q.sortAlgo == "merge"){
+                return mergeSort(result, compareUsed);
+            }
+            if (q.sortAlgo == "heap"){
+                return heapSort(result, compareUsed);
+            }
+            if (q.sortAlgo == "quick"){
+                return quickSort(result, compareUsed);
+            }
+
+            if (q.descending){
+                return vector<TVShow*>(result.rbegin(), result.rend());
+            }
+            else{
+                return result;
+            }
         }
     private:
         vector<TVShow*> data;
@@ -62,7 +103,9 @@ class Database{
             }
             return true;
         }
-        bool (*compareTitle)(TVShow*, TVShow*) = [](TVShow* a, TVShow* b){return a->title < b->title;};
-
-
+        bool (*compareTitle)(TVShow*&, TVShow*&) = [](TVShow* &a, TVShow* &b){return a->title < b->title;};
+        bool (*compareRating)(TVShow*&, TVShow*&) = [](TVShow* &a, TVShow* &b){return a->rating < b->rating;};
+        bool (*compareEpisode)(TVShow*&, TVShow*&) = [](TVShow* &a, TVShow* &b){return a->episodes < b->episodes;};
+        bool (*compareYear)(TVShow*&, TVShow*&) = [](TVShow* &a, TVShow* &b){return a->year < b->year;};
+        bool (*compareSeason)(TVShow*&, TVShow*&) = [](TVShow* &a, TVShow* &b){return a->seasons < b->seasons;};
 };

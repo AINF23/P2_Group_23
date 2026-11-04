@@ -6,12 +6,12 @@ int main(){
     Database db;
 
     TVShow* show1 = new TVShow;
-    show1->rating = 5.7;
+    show1->rating = 6.7;
     show1->title = "Amazing Horse";
     show1->genre = "romance";
 
     TVShow* show2 = new TVShow;
-    show2->rating = 6.4;
+    show2->rating = 3.4;
     show2->title = "Theoretical Physics";
     show2->genre = "scifi";
 
@@ -23,8 +23,6 @@ int main(){
     vector<TVShow*> data = {show2, show1, show3};
     db.loadData(data);
     Query q;
-    q.ratingMin = 6;
-    q.ratingMax = 5;
     q.titlePrefix = "";
 
     vector<TVShow*> filteredData = db.applyQuery(q);
@@ -38,8 +36,8 @@ int main(){
     }
 
     vector<int> unsorted = {7, 4, 3, 9, 16, 32, 2};
-    bool (*compare)(const int&, const int&) = [](const int &a, const int& b){return a < b;};
-    vector<int> sorted = heapSort(unsorted, compare);
+    bool (*compare)(int&, int&) = [](int &a, int& b){return a < b;};
+    vector<int> sorted = quickSort(unsorted, compare);
 
     for (int i = 0; i < sorted.size(); i++){
         if (i != sorted.size() - 1){
