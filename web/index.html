@@ -42,7 +42,7 @@
         </label>
 
         <!-- maybe change to star system-->
-        <label> Minimum rating: <output id="ratingOut"> 2.0</output>  <!--change to be dynamic-->
+        <label> Minimum rating: <output id="ratingOut"> 0.0</output>  <!--change to be dynamic-->
             <input id="ratingMin" type="range" min= "0" max ="10" step="0.1" value= "7">
         </label>
 
@@ -66,6 +66,13 @@
                 <option value="title"> Title </option>
             </select>
         </label>
+
+        <fieldset>
+            <legend>Episodes</legend>
+            <input id="episodesMin" type="number" min="1" placeholder="Min" aria-label="Minimum episodes">
+            <span> to </span>
+            <input id="episodesMax" type="number" min="0" placeholder="Max" aria-label="Maximum episodes">
+        </fieldset>
 
         <label> Sorting Algorithm:
             <select id = "sortAlgo">
@@ -95,6 +102,12 @@
 
 
 </main>
+<footer>
+
+<marquee> hellow Orld
+    <img src = "https://commons.wikimedia.org/wiki/File:Image.jpg">
+</marquee>
+</footer>
 <script src="script.js"></script>
 </body>
 </html>

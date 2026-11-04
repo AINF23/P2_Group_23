@@ -47,14 +47,18 @@ int main() {
 
     server.Get("/api/search", [&](const httplib::Request & req, httplib::Response &res) {
        Query q;
-        q.ratingMin = getFloat(req, "ratingMin", 1.0);
+        q.ratingMin = getFloat(req, "ratingMin", 0.0);
         q.ratingMax = getFloat(req, "ratingMax", 10.0);
         q.titlePrefix = getText(req, "titlePrefix", "");
         q.genrePrefix = getText(req, "genre", "");
         q.sortBy = getText(req, "sortBy", "rating");
         q.sortAlgo = getText(req, "sortAlgo", "quick");
         q.descending = (getText(req, "descending", "false") == "true");
-        //q.yearMin  q.yearMax  q.seasonsMax
+        q.yearMin = getFloat(req, "ratingMin", 0);
+        q.yearMax = (int) getFloat(req, "yearMin", 0);
+        q.seasonMax = (int) getFloat(req, "seasonsMax", 10000);
+        q.episodeMin = (int) getFloat(req, "episodesMin", 1);
+        q.episodeMax = (int) getFloat(req, "episodesMax", 10000);
 
         auto start = chrono::steady_clock::now();
         vector<TVShow*> results = db.applyQuery(q);

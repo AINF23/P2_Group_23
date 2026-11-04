@@ -4,7 +4,8 @@ let currentShows = [];
 
 const sample_show = [
     {title: "Breaking Bad", year: 2000, rating: 9.5, seasons: 5, episodes: 62, genre: "Crime,Drama"},
-    {title: "Loki", year: 2022, rating: 8.2, seasons: 2, episodes: 12, genre: "Action,Adventure"}
+    {title: "Loki", year: 2022, rating: 8.2, seasons: 2, episodes: 12, genre: "Action,Adventure"},
+    {title: "Soup", year: 2022, rating: 6.9, seasons: 2, episodes: 12, genre: "Romance"}
 ];
 
 function readQuery(){
@@ -14,8 +15,10 @@ function readQuery(){
         ratingMin: document.getElementById("ratingMin").value,
         yearMin: document.getElementById("yearMin").value,
         yearMax: document.getElementById("yearMax").value,
-        seasonsMin: document.getElementById("seasonsMin").value,
+        //seasonsMin: document.getElementById("seasonsMin").value,
         seasonsMax: document.getElementById("seasonsMax").value,
+        episodesMax: document.getElementById("episodesMax").value,
+        episodesMin: document.getElementById("episodesMin").value,
         sortBy: document.getElementById("sortBy").value,
         sortAlgo: document.getElementById("sortAlgo").value,
         descending: document.getElementById("descending").checked
@@ -30,6 +33,8 @@ function searchSample(q){
         if(q.yearMax !== "" && s.year > Number(q.yearMax)) return false;
        // if(q.seasonsMin !== "" && s.seasons < Number(q.seasonsMin)) return false;
         if(q.seasonsMax !== "" && s.seasons > Number(q.seasonsMax)) return false;
+        if(q.episodesMin !== "" && s.episodes < Number(q.episodesMin)) return false;
+        if(q.episodesMax !== "" && s.episodes > Number(q.episodesMax)) return false;
         if(q.titlePrefix !== "" && !s.title.toLowerCase().startsWith(q.titlePrefix.toLowerCase())) return false;
         if(q.genre !== "" && !s.genre.split(",").includes(q.genre)) return false;
         return true;
@@ -145,9 +150,19 @@ async function runSearch(){
           event.preventDefault();
           runSearch();
           });
-      document.getElementById("suprise").addEventListener("click", showPick);
+      document.getElementById("surprise").addEventListener("click", showPick);
       document.getElementById("ratingMin").addEventListener("input", function(event) {
     document.getElementById("ratingOut").textContent = Number(event.target.value).toFixed(1);
       });
 
       runSearch();
+
+//responsive slider
+function updateRatingSlider(){
+    const value = document.getElementById("ratingMin").value;
+    document.getElementById("ratingOut").textContent = Number(value).toFixed(1);
+}
+document.getElementById("ratingMin").addEventListener("input", function(event) {
+    updateRatingSlider();
+});
+updateRatingSlider();
