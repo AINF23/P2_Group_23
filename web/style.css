@@ -2,6 +2,10 @@
     --bg: #DEDEFF;
     --panel: #FFFFFF;
     --text: #040d26;
+    --line: #077a29;
+    --buttonBG: #ef9ad1;
+    --status: #d56913
+    --gold: #ffc107
 }
 
 *{box-sizing: border-box;}
@@ -15,21 +19,116 @@ body{
 }
 
 .top{
-    padding: 40px 24px 24px;
-    max-width: 1000px;
+    padding: 15px 24px 6px;
     margin: 0 auto;
+    max-width: 1200px;
 }
 
 .top h1{
-
+    margin: 0;
+    line-height: 1.1;
+    text-align: left;
+    font-family: "Moirai One", serif;
+    font-size: 50px;
 }
 
 .top p{
-
+    margin: 0;
+    max-width: 52ch;
+    color: var(--text);
 }
 
-.layout{}
+.layout{
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 32px;
+    align-items: start;
+}
 
-.panel{}
-.status{}
-.list{}
+.main{
+    max-width: 1900px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 32px;
+    /*min-height: 100vh;*/
+    align-items: start;
+}
+
+.panel{
+    background-color: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px;
+    display: grid;
+    gap: 16px;
+}
+
+.panel label,
+.panel legend{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font size: 12px;
+}
+.buttons {
+    display: grid;
+    gap: 8px;
+}
+
+button{
+    font: inherit;
+    font-weight: 600px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    background-color: var(--buttonBG);
+    color: #e12222;
+    cursor: pointer;
+}
+.status{
+    margin: 0 0 12px;
+    color: var(--status);
+    font-size: 16px;
+    text-align: center;
+}
+.list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background-color: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+}
+
+.list:empty{
+    display:none;
+}
+
+.show{
+    display:grid;
+    grid-template-columns: 64px 1fr auto;
+    gap: 16px;
+    align-items: center;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+}
+
+.show:last-child{
+    border-bottom:0;
+}
+.show h2{
+    margin: 0;
+}
+.rating{
+    background-color: var(--status);
+    color:var(--gold);
+    text-align: center;
+    border-radius: 8px;
+    padding: 8px;
+}
+
