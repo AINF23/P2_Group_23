@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <ctime>
+#include <algorithm>
 #include "sorting.hpp"
 
 using namespace std;
@@ -91,11 +92,9 @@ class Database{
             clock_t endTime = clock();
             duration = double(endTime - startTime) / CLOCKS_PER_SEC;
             if (q.descending){
-                return vector<TVShow*>(result.rbegin(), result.rend());
+                reverse(result.begin(), result.end());
             }
-            else{
-                return result;
-            }
+            return result;
         }
     private:
         vector<TVShow*> data;
