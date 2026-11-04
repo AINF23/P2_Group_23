@@ -41,7 +41,6 @@ int main() {
 
     Database db;
     db.loadData(shows);
-    cout << db.data[3]->title << endl;
 
     httplib::Server server;
     server.set_mount_point("/", "../web");

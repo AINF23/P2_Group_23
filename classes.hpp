@@ -96,7 +96,7 @@ class Database{
             }
             return result;
         }
-    public:
+    private:
         vector<TVShow*> data;
         bool checkPrefix(string prefix, string s){
             for (int i = 0; i < prefix.size(); i++){
