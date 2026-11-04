@@ -21,6 +21,11 @@ int main(){
     show3->genre = "drama";
 
     vector<TVShow*> data = {show2, show1, show3};
+    for (int i = 0; i < 100000; i++){
+        data.push_back(show3);
+        data.push_back(show1);
+        data.push_back(show2);
+    }
     db.loadData(data);
     Query q;
     q.titlePrefix = "";
@@ -34,6 +39,7 @@ int main(){
             cout << filteredData[i]->title << endl;
         }
     }
+    cout << db.duration << endl;
 
     vector<int> unsorted = {7, 4, 3, 9, 16, 32, 2};
     bool (*compare)(int&, int&) = [](int &a, int& b){return a < b;};
