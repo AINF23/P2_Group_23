@@ -21,14 +21,9 @@ int main(){
     show3->genre = "drama";
 
     vector<TVShow*> data = {show2, show1, show3};
-    for (int i = 0; i < 100000; i++){
-        data.push_back(show3);
-        data.push_back(show1);
-        data.push_back(show2);
-    }
     db.loadData(data);
     Query q;
-    q.titlePrefix = "";
+    q.titlePrefix = "b";
 
     vector<TVShow*> filteredData = db.applyQuery(q);
     for (int i = 0; i < filteredData.size(); i++){

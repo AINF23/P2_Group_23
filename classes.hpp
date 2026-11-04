@@ -3,6 +3,7 @@
 #include <vector>
 #include <ctime>
 #include <algorithm>
+#include <cctype>
 #include "sorting.hpp"
 
 using namespace std;
@@ -45,7 +46,11 @@ class Database{
                 if (data[i]->rating < q.ratingMin || data[i]->rating > q.ratingMax){
                     continue;
                 }
-                if (!checkPrefix(q.titlePrefix, data[i]->title)){
+                string data_title = data[i]->title;
+                transform(data_title.begin(), data_title.end(), data_title.begin(), [](unsigned char c){
+                    return tolower(c);
+                });
+                if (!checkPrefix(q.titlePrefix, data_title)){
                     continue;
                 }
                 if (!checkPrefix(q.genrePrefix, data[i]->genre)){
