@@ -4,7 +4,7 @@
 using namespace std;
 
 template <typename T>
-vector<T> mergeSort(const vector<T>& data, bool (*comparison)(const T&, const T&)){
+vector<T> mergeSort(const vector<T>& data, bool (*comparison)(T&, T&)){
     if (data.size() <= 1){
         return data;
     }
@@ -32,17 +32,39 @@ vector<T> mergeSort(const vector<T>& data, bool (*comparison)(const T&, const T&
 }
 
 template <typename T>
-vector<T> quickSort(const vector<T>& data, bool (*comparison)(const T&, const T&)){
-    vector<T> items = data;
-
+vector<T> quickSort(const vector<T>& data, bool (*comparison)(T&, T&)){
+    if (data.size() <= 1){
+        return data;
+    }
+    T partition = data[data.size() / 2];
+    vector<T> firsthalf;
+    vector<T> secondhalf;
+    for (int i = 0; i < data.size(); i++){
+        if (i == data.size() / 2){
+            continue;
+        }
+        T entry = data[i];
+        if (comparison(entry, partition)){
+            firsthalf.push_back(data[i]);
+        }
+        else{
+            secondhalf.push_back(data[i]);
+        }
+    }
+    vector<T> result = {partition};
+    vector<T> beginResult = quickSort(firsthalf, comparison);
+    vector<T> endResult = quickSort(secondhalf, comparison);
+    result.insert(result.begin(), beginResult.begin(), beginResult.end());
+    result.insert(result.end(), endResult.begin(), endResult.end());
+    return result;
 }
 
 //heap sort
 template <typename T>
-void heapify(vector<T> &v, int heapSize, int parent, bool(*comparison)(const T&, const T&)){
+void heapify(vector<T> &v, int heapSize, int parent, bool(*comparison)(T&, T&)){
     int largest = parent;
     int leftChild = 2*parent+1;
-    int rightChild = 2*parent +2;
+    int rightChild = 2*parent+2;
     if (leftChild < heapSize && comparison(v[largest], v[leftChild])) {
         largest = leftChild;
     }
@@ -56,7 +78,7 @@ void heapify(vector<T> &v, int heapSize, int parent, bool(*comparison)(const T&,
 }
 
 template <typename T>
-vector<T> heapSort(const vector<T> &data, bool (*comparison)(const T&, const T&)) {
+vector<T> heapSort(const vector<T> &data, bool (*comparison)(T&, T&)) {
     vector<T> result = data;
     int n = result.size();
     for (int i =n/2-1; i >= 0; i--) {
