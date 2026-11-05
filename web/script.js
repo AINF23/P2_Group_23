@@ -110,7 +110,7 @@ function showResults(data, q){
     }
     const source = use_sample ? " (sample data)" : "";  //testing
     status.textContent = data.total + " shows: " + shown + " sorted with: " + q.sortAlgo +
-        " sorted in " + data.sortMs.toFixed(2) + " ms." +source;
+        " sort. Sorted in " + data.sortMs.toFixed(2) + " ms." +source;
 
 }
 
