@@ -44,4 +44,4 @@ Use CLion/VS Code or any Cmake setup with a C++17 compiler.
 
 ### Credits
 - IMDb datasets
-- 
+-  httplib.h  Copyright (c) 2026 Yuji Hirose
