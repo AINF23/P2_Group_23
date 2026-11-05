@@ -2,6 +2,22 @@
 #include "sorting.hpp"
 #include <iostream>
 
+bool checkContain(string str, string s){
+        int idx = 0;
+        for (int i = 0; i < str.size(); i++){
+            if (str[i] == s[idx]){
+                idx += 1;
+            }
+            else{
+                idx = 0;
+            }
+            if (idx == s.size()){
+                return true;
+            }
+        }
+        return false;
+    }
+
 int main(){
     Database db;
 

@@ -51,10 +51,9 @@ vector<T> quickSort(const vector<T>& data, bool (*comparison)(T&, T&)){
             secondhalf.push_back(data[i]);
         }
     }
-    vector<T> result = {partition};
-    vector<T> beginResult = quickSort(firsthalf, comparison);
+    vector<T> result = quickSort(firsthalf, comparison);
+    result.push_back(partition);
     vector<T> endResult = quickSort(secondhalf, comparison);
-    result.insert(result.begin(), beginResult.begin(), beginResult.end());
     result.insert(result.end(), endResult.begin(), endResult.end());
     return result;
 }

@@ -50,10 +50,10 @@ class Database{
                 transform(data_title.begin(), data_title.end(), data_title.begin(), [](unsigned char c){
                     return tolower(c);
                 });
-                if (!checkPrefix(q.titlePrefix, data_title)){
+                if (!checkContain(q.titlePrefix, data_title)){
                     continue;
                 }
-                if (!checkPrefix(q.genrePrefix, data[i]->genre)){
+                if (!checkContain(q.genrePrefix, data[i]->genre)){
                     continue;
                 }
                 if (data[i]->year < q.yearMin || data[i]->year > q.yearMax){
@@ -110,6 +110,21 @@ class Database{
                 }
             }
             return true;
+        }
+        bool checkContain(string substring, string s){
+            int idx = 0;
+            for (int i = 0; i < s.size(); i++){
+                if (s[i] == substring[idx]){
+                    idx += 1;
+                }
+                else{
+                    idx = 0;
+                }
+                if (idx == substring.size()){
+                    return true;
+                }
+            }
+            return false;
         }
         bool (*compareTitle)(TVShow*&, TVShow*&) = [](TVShow* &a, TVShow* &b){return a->title < b->title;};
         bool (*compareRating)(TVShow*&, TVShow*&) = [](TVShow* &a, TVShow* &b){return a->rating < b->rating;};
