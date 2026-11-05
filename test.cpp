@@ -2,6 +2,22 @@
 #include "sorting.hpp"
 #include <iostream>
 
+bool checkContain(string str, string s){
+        int idx = 0;
+        for (int i = 0; i < str.size(); i++){
+            if (str[i] == s[idx]){
+                idx += 1;
+            }
+            else{
+                idx = 0;
+            }
+            if (idx == s.size()){
+                return true;
+            }
+        }
+        return false;
+    }
+
 int main(){
     Database db;
 
@@ -21,14 +37,9 @@ int main(){
     show3->genre = "drama";
 
     vector<TVShow*> data = {show2, show1, show3};
-    for (int i = 0; i < 100000; i++){
-        data.push_back(show3);
-        data.push_back(show1);
-        data.push_back(show2);
-    }
     db.loadData(data);
     Query q;
-    q.titlePrefix = "";
+    q.titlePrefix = "b";
 
     vector<TVShow*> filteredData = db.applyQuery(q);
     for (int i = 0; i < filteredData.size(); i++){
